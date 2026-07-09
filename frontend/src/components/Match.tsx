@@ -120,13 +120,16 @@ export const Match: React.FC = () => {
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
           
           {/* Logo Branding */}
-          <div className="flex flex-col items-center sm:items-start text-left select-none">
-            <span className="text-[8px] uppercase font-black text-brandGreen tracking-widest leading-none mb-1">
-              Live Arena
-            </span>
-            <h2 className="text-lg font-black uppercase tracking-wider leading-none">
-              SIGMA <span className="text-brandGreen">LEAGUE PRO</span>
-            </h2>
+          <div className="flex items-center gap-2.5 select-none">
+            <img src="/logo.png" alt="Sigma League Logo" className="w-8 h-8 object-contain select-none pointer-events-none" />
+            <div className="flex flex-col text-left">
+              <span className="text-[7px] uppercase font-black text-brandGreen tracking-widest leading-none mb-0.5">
+                Live Arena
+              </span>
+              <h2 className="text-base font-black uppercase tracking-wider leading-none">
+                SIGMA <span className="text-brandGreen">LEAGUE PRO</span>
+              </h2>
+            </div>
           </div>
 
           {/* Centralized Scoreboard Box */}

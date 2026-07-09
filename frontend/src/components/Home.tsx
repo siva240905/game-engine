@@ -122,7 +122,8 @@ export const Home: React.FC = () => {
       {/* Main Header */}
       <header className="glass border-b border-white/5 py-4 px-6 sticky top-0 backdrop-blur-md z-30 shadow-lg">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5">
+            <img src="/logo.png" alt="Sigma League Logo" className="w-8 h-8 object-contain select-none pointer-events-none" />
             <h2 className="text-xl font-black uppercase tracking-wider">
               SIGMA <span className="text-brandGreen">LEAGUE</span>
             </h2>

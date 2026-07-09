@@ -62,6 +62,13 @@ export const AuthScreen: React.FC = () => {
           <Trophy className="w-4 h-4" />
           <span>Real-time Multiplayer Game</span>
         </div>
+        <div className="flex justify-center mb-5">
+          <img 
+            src="/logo.png" 
+            alt="Sigma League Logo" 
+            className="w-28 h-28 md:w-32 md:h-32 object-contain drop-shadow-[0_0_20px_rgba(234,179,8,0.15)] select-none pointer-events-none" 
+          />
+        </div>
         <h1 className="text-4xl md:text-5xl font-black tracking-tight uppercase">
           SIGMA <span className="text-brandGreen glow-green">LEAGUE</span>
         </h1>
