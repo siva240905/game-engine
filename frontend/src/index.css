@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-darkBg: #080C14;
+  --color-cardBg: #121824;
+  --color-brandGreen: #10B981;
+  --color-brandOrange: #FF5722;
+  --color-accentGold: #FBBF24;
+  --color-textPrimary: #F3F4F6;
+  --color-textSecondary: #9CA3AF;
+
+  --font-sans: 'Outfit', 'Inter', 'system-ui', 'sans-serif';
+
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-bounce-slow: bounce 2.5s infinite;
+  --animate-shake: shake 0.4s ease-in-out;
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 50%, 90% { transform: translateX(-8px); }
+    30%, 70% { transform: translateX(8px); }
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #080C14;
+  color: #F3F4F6;
+  font-family: 'Outfit', 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Glassmorphism utility classes */
+.glass {
+  background: rgba(18, 24, 36, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-glow {
+  box-shadow: 0 8px 32px 0 rgba(16, 185, 129, 0.1);
+}
+
+.glass-glow-orange {
+  box-shadow: 0 8px 32px 0 rgba(255, 87, 34, 0.1);
+}
+
+/* Scrollbar tweaks */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #080C14;
+}
+::-webkit-scrollbar-thumb {
+  background: #1f293d;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2b3952;
+}
+
+/* Custom text glow */
+.glow-green {
+  text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+}
+
+.glow-orange {
+  text-shadow: 0 0 10px rgba(255, 87, 34, 0.5);
+}
+
+/* Wicket shake effect */
+.shake-animate {
+  animation: shake 0.4s ease-in-out;
+}
