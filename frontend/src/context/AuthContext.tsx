@@ -25,6 +25,26 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const VITE_API_URL = import.meta.env.VITE_API_URL || import.meta.env.VITE_SOCKET_URL || 
   (window.location.hostname === 'localhost' ? 'http://localhost:5000' : window.location.origin);
 
+const safeParseJson = async (res: Response, fallbackError: string) => {
+  const contentType = res.headers.get('content-type');
+  if (contentType && contentType.includes('application/json')) {
+    try {
+      return await res.json();
+    } catch (e) {
+      throw new Error('Invalid server response format.');
+    }
+  }
+  
+  if (res.status === 502 || res.status === 503 || res.status === 504) {
+    throw new Error('Server is starting up on Render. Please wait 15-30 seconds and try again!');
+  }
+  
+  const text = await res.text();
+  // Strip HTML tags if HTML is returned
+  const cleanText = text.replace(/<[^>]*>/g, '').trim().substring(0, 80);
+  throw new Error(cleanText || `${fallbackError} (Status: ${res.status})`);
+};
+
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<IUser | null>(null);
   const [token, setToken] = useState<string | null>(null);
@@ -48,7 +68,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         });
 
         if (response.ok) {
-          const data = await response.json();
+          const data = await safeParseJson(response, 'Auth check failed');
           setUser(data.user);
           setToken(storedToken);
         } else {
@@ -75,7 +95,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         body: JSON.stringify({ username, password })
       });
 
-      const data = await response.json();
+      const data = await safeParseJson(response, 'Login failed');
       if (!response.ok) {
         throw new Error(data.error || 'Login failed');
       }
@@ -101,7 +121,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         body: JSON.stringify({ username, password, avatar })
       });
 
-      const data = await response.json();
+      const data = await safeParseJson(response, 'Registration failed');
       if (!response.ok) {
         throw new Error(data.error || 'Registration failed');
       }
@@ -127,7 +147,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         body: JSON.stringify({ avatar })
       });
 
-      const data = await response.json();
+      const data = await safeParseJson(response, 'Guest login failed');
       if (!response.ok) {
         throw new Error(data.error || 'Guest login failed');
       }
