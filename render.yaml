@@ -1,0 +1,31 @@
+services:
+  # 1. Backend Web Service
+  - type: web
+    name: sigma-league-backend
+    env: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: JWT_SECRET
+        value: sigma-secret-jwt-token-replace-me-in-prod
+      # If you configure a MongoDB Atlas cluster, add its URI here:
+      # - key: MONGO_URI
+      #   value: mongodb+srv://...
+
+  # 2. Frontend Static Site
+  - type: web
+    name: sigma-league-frontend
+    env: static
+    plan: free
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    publishDir: dist
+    envVars:
+      - key: VITE_SOCKET_URL
+        value: https://sigma-league-backend.onrender.com # Replace with your actual backend Web Service URL once Render creates it!
